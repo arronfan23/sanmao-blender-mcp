@@ -64,6 +64,21 @@ if (Test-Path $bundled) {
 if ($ok) { Write-Host "插件已保存到: $dest\addon.py" }
 else { Write-Host "[!] 插件下载失败, 请把网络问题处理后重试" -ForegroundColor Red }
 
+Write-Step "3.5/4 把插件直接写入 Blender 插件目录 (覆盖旧版本)"
+$blenderUserBase = "$env:APPDATA\Blender Foundation\Blender"
+$versions = Get-ChildItem $blenderUserBase -Directory -ErrorAction SilentlyContinue
+if ($versions) {
+    foreach ($v in $versions) {
+        $addonsDir = Join-Path $v.FullName "scripts\addons"
+        New-Item -ItemType Directory -Force $addonsDir | Out-Null
+        Copy-Item "$dest\addon.py" (Join-Path $addonsDir "addon.py") -Force
+        Write-Host "已覆盖安装到: $addonsDir\addon.py"
+    }
+    Write-Host "如果 Blender 正在运行, 请完全关闭再重新打开, 然后在插件列表勾选 MCP for Blender"
+} else {
+    Write-Host "未检测到 Blender 用户目录, 请打开过一次 Blender 后再运行本脚本, 或按说明书手动安装插件"
+}
+
 Write-Step "4/4 预下载 blender-mcp 服务包"
 & uv run --with blender-mcp python -c "print('blender-mcp ok')"
 
