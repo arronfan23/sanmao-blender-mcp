@@ -58,7 +58,7 @@ if (Test-Path $bundled) {
     $ok = $false
     foreach ($u in $urls) {
         curl.exe -sL $u -m 60 -o "$dest\addon.py"
-        if ((Get-Item "$dest\addon.py" -ErrorAction SilentlyContinue).Length -gt 10000) { $ok = $true; break }
+        if ((Get-Item "$dest\addon.py" -ErrorAction SilentlyContinue).Length -gt 100000) { $ok = $true; break }
     }
 }
 if ($ok) { Write-Host "插件已保存到: $dest\addon.py" }

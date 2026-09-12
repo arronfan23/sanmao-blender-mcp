@@ -16,7 +16,6 @@
 |------|------|
 | `0-双击我安装.bat` | 启动入口，双击运行 |
 | `sanmaoworkbuddy.ps1` | 一键安装脚本（自动装 uv、Blender、插件、预下载 MCP 服务包） |
-| `1-一键安装.ps1` | 与 sanmaoworkbuddy.ps1 内容相同 |
 | `addon.py` | Blender 插件（来自 [ahujasid/blender-mcp](https://github.com/ahujasid/blender-mcp)） |
 | `2-手动操作说明.txt` | 手动操作图文步骤 |
 
